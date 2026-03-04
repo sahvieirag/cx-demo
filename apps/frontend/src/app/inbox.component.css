@@ -1,0 +1,30 @@
+.inbox-container { 
+  padding: 20px; 
+  font-family: 'Segoe UI', sans-serif; 
+}
+.ticket-card { 
+  border: 1px solid #ddd; 
+  margin-bottom: 10px; 
+  padding: 15px; 
+  border-radius: 8px; 
+}
+.whatsapp { 
+  border-left: 5px solid #25D366; 
+}
+.instagram { 
+  border-left: 5px solid #C13584; 
+}
+.radiant-btn-primary { 
+  background-color: #f7b500; 
+  border: none; 
+  padding: 8px 16px; 
+  border-radius: 4px; 
+  cursor: pointer; 
+}
+.ai-summary { 
+  background-color: #f0f4ff; 
+  padding: 10px; 
+  margin-top: 10px; 
+  font-size: 0.9em; 
+  font-style: italic; 
+}
