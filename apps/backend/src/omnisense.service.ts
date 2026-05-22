@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Ticket } from '../../../libs/shared/interfaces/ticket';
+import { Ticket } from '@luminacx/shared/interfaces/ticket';
 
 @Injectable()
 export class OmnisenseService {

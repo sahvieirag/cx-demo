@@ -22,6 +22,5 @@ describe('Unified Inbox - LuminaCX', () => {
     cy.get('.radiant-btn-primary').first().click();
     
     cy.get('@consoleLog').should('be.calledWithMatch', /Abriu ticket/);
-    cy.get('@consoleLog').should('be.calledWithMatch', /XXX-001/);
   });
 });

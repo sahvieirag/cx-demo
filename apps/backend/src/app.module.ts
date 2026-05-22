@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
 import { OmnisenseService } from './omnisense.service';
+import { TicketsService } from './tickets.service';
+import { TicketsController } from './tickets.controller';
 
 @Module({
   imports: [],
-  controllers: [],
-  providers: [OmnisenseService],
+  controllers: [TicketsController],
+  providers: [OmnisenseService, TicketsService],
 })
 export class AppModule {}

@@ -5,6 +5,9 @@
   </header>
 
   <section class="ticket-list">
+    <p *ngIf="loading" class="loading-message">Loading tickets...</p>
+    <p *ngIf="error" class="error-message">{{ error }}</p>
+
     <div *ngFor="let ticket of activeTickets" 
          class="ticket-card" 
          [ngClass]="ticket.channel.toLowerCase()">
@@ -20,5 +23,7 @@
         <button (click)="openTicket(ticket.id)" class="radiant-btn-primary">Responder</button>
       </div>
     </div>
+
+    <p *ngIf="!loading && !error && activeTickets.length === 0" class="empty-message">No tickets found.</p>
   </section>
 </div>
