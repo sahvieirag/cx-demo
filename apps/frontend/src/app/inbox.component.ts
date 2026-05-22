@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Ticket, Channel, TicketStatus } from '../../../../libs/shared/interfaces/ticket';
+import { Ticket } from '@luminacx/shared/interfaces/ticket';
+import { TicketService } from './ticket.service';
 
 @Component({
   selector: 'app-inbox',
@@ -10,24 +11,27 @@ import { Ticket, Channel, TicketStatus } from '../../../../libs/shared/interface
   styleUrls: ['./inbox.component.css']
 })
 export class InboxComponent implements OnInit {
-  activeTickets: Ticket[] = [
-    {
-      id: 'T-100',
-      customerId: 'C-01',
-      customerName: 'Sabrina Guerra',
-      lastMessage: 'Gostaria de agendar uma consulta com o Dr. Mobile para amanhã.',
-      channel: Channel.WHATSAPP,
-      status: TicketStatus.OPEN,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      tags: ['Health', 'Scheduling'],
-      omnisenseSummary: 'Paciente deseja agendamento urgente.'
-    }
-  ];
+  activeTickets: Ticket[] = [];
+  loading = true;
+  error: string | null = null;
 
-  ngOnInit(): void {}
+  constructor(private readonly ticketService: TicketService) {}
+
+  ngOnInit(): void {
+    this.ticketService.getTickets().subscribe({
+      next: (tickets) => {
+        this.activeTickets = tickets;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load tickets. Is the backend running?';
+        this.loading = false;
+        console.error('Error fetching tickets:', err);
+      },
+    });
+  }
 
   openTicket(id: string): void {
-    console.log(`Abriu ticket ${id} - Referência Jira: XXX-001`);
+    console.log(`Abriu ticket ${id}`);
   }
 }
