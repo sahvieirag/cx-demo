@@ -1,24 +1,56 @@
 <div class="inbox-container radiant-ui-theme">
   <header class="inbox-header">
-    <h1>Unified Inbox</h1>
-    <p>Omnisense AI: Enabled</p>
+    <div class="header-title-area">
+      <div class="logo-glow"></div>
+      <h1>Unified Inbox</h1>
+    </div>
+    <p class="ai-status">
+      <span class="pulse-dot"></span>
+      Omnisense AI: Enabled
+    </p>
   </header>
 
-  <section class="ticket-list">
-    <div *ngFor="let ticket of activeTickets" 
-         class="ticket-card" 
-         [ngClass]="ticket.channel.toLowerCase()">
-      <div class="ticket-info">
-        <span class="channel-badge">{{ ticket.channel }}</span>
-        <h3>{{ ticket.customerName }}</h3>
-        <p>{{ ticket.lastMessage }}</p>
+  <main class="inbox-content">
+    <section class="ticket-list">
+      <div *ngFor="let ticket of activeTickets" 
+           class="ticket-card" 
+           [ngClass]="ticket.channel.toLowerCase()">
+        
+        <div class="ticket-info">
+          <div class="ticket-header">
+            <span class="channel-badge" [ngClass]="'badge-' + ticket.channel.toLowerCase()">
+              {{ ticket.channel }}
+            </span>
+            <span class="time-stamp">Agora mesmo</span>
+          </div>
+          
+          <h3 class="customer-name">{{ ticket.customerName }}</h3>
+          <p class="last-message">{{ ticket.lastMessage }}</p>
+          
+          <div class="tags-container">
+            <span class="ticket-tag" *ngFor="let tag of ticket.tags">#{{ tag }}</span>
+          </div>
+        </div>
+
+        <div class="ai-summary" *ngIf="ticket.omnisenseSummary">
+          <div class="ai-badge">
+            <svg class="ai-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2V6M12 18V22M4.22 4.22L7.05 7.05M16.95 16.95L19.78 19.78M2 12H6M18 12H22M4.22 19.78L7.05 16.95M16.95 7.05L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <strong>Omnisense Insight:</strong>
+          </div>
+          <p class="summary-text">{{ ticket.omnisenseSummary }}</p>
+        </div>
+
+        <div class="actions">
+          <button (click)="openTicket(ticket.id)" class="radiant-btn-primary">
+            <span>Responder Cliente</span>
+            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
       </div>
-      <div class="ai-summary" *ngIf="ticket.omnisenseSummary">
-        <strong>Omnisense Insight:</strong> {{ ticket.omnisenseSummary }}
-      </div>
-      <div class="actions">
-        <button (click)="openTicket(ticket.id)" class="radiant-btn-primary">Responder</button>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 </div>

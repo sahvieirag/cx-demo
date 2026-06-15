@@ -36,7 +36,8 @@
                 }
               ],
               "outputHashing": "all"
-            }
+            },
+            "development": {}
           }
         },
         "serve": {
